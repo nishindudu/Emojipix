@@ -1,3 +1,3 @@
-# Emoji Mosaic Generator
+# EmojiPix
 
 Turn your images into emoji mosaics
