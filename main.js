@@ -100,6 +100,8 @@ function updateProgress(val) {
 }
 
 async function convertToEmojis(img) {
+    downloadLink.ariaDisabled = true;
+    downloadLink.classList.remove('animated-btn');
     canvas.style.display = 'none';
     console.log('converting');
     let upscale = document.getElementById('upscale-factor').value;
@@ -116,7 +118,7 @@ async function convertToEmojis(img) {
     }
 
     if (img.width > 3000 || img.height > 3000) {
-        alert('Image too large. If conversion fails, try a smaller upscale factor.');
+        alert('Image too large. May impact Performance. If conversion fails, try a smaller upscale factor.');
     }
 
     console.log(`upscale: ${upscale}, blockSize: ${blockSize}`);
@@ -152,6 +154,8 @@ async function convertToEmojis(img) {
 
     downloadLink.href = canvas.toDataURL('image/png');
     downloadLink.ariaDisabled = false;
+    downloadLink.classList.add('animated-btn');
+
     // console.log(canvas.toDataURL('image/png'));
     // console.log('url set')
 }

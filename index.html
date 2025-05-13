@@ -4,22 +4,24 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>
-            Emoji Mosaic Generator
+            Emojipix
         </title>
         <link rel="stylesheet" href="index.css">
         <script src="main.js" defer=""></script>
     </head>
     <body>
         <div id="input-div">
-            <input type="file" id="file-picker">
-            <label for="file-picker" class="custom-file-picker">Choose File</label>
+            <h1>Emojipix</h1>
+            <p>Upload an image and generate a mosaic using emojis!</p>
+            <input type="file" id="file-picker" accept="image/jpeg, image/png">
+            <label for="file-picker" class="custom-file-picker">Choose Image</label>
             <div class="input-row">
+                <label for="blocksize">Block Size: </label>&nbsp;
                 <input type="number" id="blocksize" value="16" min="1" max="25">
-                <label for="blocksize">Block Size</label>
             </div>
             <div class="input-row">
+                <label for="upscale-factor">Upscale Factor: </label> &nbsp;
                 <input type="number" id="upscale-factor" value="7" min="1" max="15">
-                <label for="upscale-factor">Upscale Factor</label>
             </div>
             <button type="button" class="btn" onclick="handleFileInput()">Generate!</button>
             <div id="progress-outline">
