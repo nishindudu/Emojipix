@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Emoji Mosaic Generator
+        </title>
+        <link rel="stylesheet" href="index.css">
+        <script src="main.js" defer=""></script>
+    </head>
+    <body>
+        <div id="input-div">
+            <input type="file" id="file-picker">
+            <label for="file-picker" class="custom-file-picker">Choose File</label>
+            <div class="input-row">
+                <input type="number" id="blocksize" value="16" min="1" max="25">
+                <label for="blocksize">Block Size</label>
+            </div>
+            <div class="input-row">
+                <input type="number" id="upscale-factor" value="7" min="1" max="15">
+                <label for="upscale-factor">Upscale Factor</label>
+            </div>
+            <button type="button" class="btn" onclick="handleFileInput()">Generate!</button>
+            <div id="progress-outline">
+                <div id="progress"></div>
+            </div>
+        </div>
+        <canvas id="image-canvas"></canvas>
+        <div id="end">
+            <a id="download" href="#" download="mosaic.png" class="btn" aria-disabled="true">Download</a>
+        </div>
+    </body>
+</html>

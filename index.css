@@ -1,0 +1,107 @@
+body{
+    background: #fff;
+    margin: 0;
+}
+
+#input-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3683849b;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.input-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#file-picker {
+    display: none;
+}
+
+.custom-file-picker {
+    height: 10%;
+    width: 20%;
+    background-color: azure;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #101008;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+#image-canvas {
+    width: 99vw;
+    height: 50%;
+}
+
+.btn {
+    margin-top: 10px;
+    border-radius: 5px;
+    background: #000;
+    color: aliceblue;
+    border-color: #000;
+    border-width: 1px;
+    height: 8vh;
+    width: 20%;
+    font-size: large;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.btn[aria-disabled="true"] {
+    background: #202020;
+    color: #aeaeae;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn:hover {
+    width: 22%;
+    height: 9vh;
+}
+
+#progress-outline {
+    width: 20%;
+    height: 2vh;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+
+#progress {
+    background-color: #000;
+    height: 100%;
+    width: 0;
+    transition-duration: 0.2s;
+    margin: 0;
+    color: azure;
+    text-align: center;
+}
+
+
+#end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px 2px #181A20, 0 0 20px 4px #252d47;}
+    to {box-shadow: 0 0 20px 6px #181A20, 0 0 40px 12px #252d47;}
+}
+
+#download {
+    text-align: center;
+    align-content: center;
+    margin-bottom: 20px;
+    animation: glow 0.5s infinite alternate;
+}
