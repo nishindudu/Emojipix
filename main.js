@@ -87,7 +87,10 @@ const emojis = [
 
 function handleFileInput() {
     const file = fileInput.files[0]
-    if (!file) return;
+    if (!file) {
+        alert('Please select a file');
+        return;
+    }
     const img = new Image()
     img.onload = () => convertToEmojis(img);
     img.src = URL.createObjectURL(file);
@@ -151,6 +154,8 @@ async function convertToEmojis(img) {
     }
     updateProgress(1);
     canvas.style.display = 'block';
+
+    canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     downloadLink.href = canvas.toDataURL('image/png');
     downloadLink.ariaDisabled = false;
