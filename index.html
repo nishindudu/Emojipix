@@ -25,6 +25,14 @@
                 <label for="upscale-factor">Upscale Factor: </label> &nbsp;
                 <input type="number" id="upscale-factor" value="7" min="1" max="15">
             </div>
+            <div class="input-row">
+                <label for="mode">Mode: </label> &nbsp;
+                <select id="mode">
+                    <option value="normal">Normal</option>
+                    <option value="hearts">Hearts</option>
+                    <option value="flowers">Flowers</option>
+                </select>
+            </div>
             <button type="button" class="btn" onclick="handleFileInput()">Generate!</button>
             <div id="progress-outline">
                 <div id="progress"></div>
@@ -33,6 +41,7 @@
         <canvas id="image-canvas"></canvas>
         <div id="end">
             <a id="download" href="#" download="mosaic.png" class="btn" aria-disabled="true">Download</a>
+            <a id="copy" class="btn" href="#" onclick="copyText()" aria-disabled="true">Copy to Clipboard</a>
         </div>
     </body>
 </html>

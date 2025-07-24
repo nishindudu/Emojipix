@@ -2,6 +2,9 @@ const fileInput = document.getElementById('file-picker')
 const canvas = document.getElementById('image-canvas')
 const ctx = canvas.getContext('2d')
 const downloadLink = document.getElementById('download');
+const copyButton = document.getElementById('copy');
+
+var textToCopy = '';
 
 const emojis = [
     { emoji: '😀', color: [255, 223, 85] },      // yellow face
@@ -83,7 +86,53 @@ const emojis = [
     { emoji: '🦢', color: [255, 254, 255] },     // white swan (slightly different)
 ]
 
+const heartsOnly = [
+    { emoji: '❤️', color: [220, 20, 60] },
+    { emoji: '💖', color: [255, 182, 193] },
+    { emoji: '💚', color: [60, 179, 113] },
+    { emoji: '💙', color: [65, 105, 225] },
+    { emoji: '💛', color: [255, 235, 60] },
+    { emoji: '💜', color: [155, 89, 183] },
+    { emoji: '🤎', color: [121, 85, 73] },
+    { emoji: '🖤', color: [0, 0, 0] },
+    { emoji: '🤍', color: [255, 255, 255] },
+    { emoji: '💓', color: [255, 0, 151] },
+]
+
+const flowers = [
+    { emoji: '🌸', color: [255, 182, 193] },      // cherry blossom pink
+    { emoji: '🌹', color: [220, 20, 60] },        // rose red
+    { emoji: '🌺', color: [255, 105, 180] },      // hibiscus pink
+    { emoji: '🌻', color: [255, 215, 0] },        // sunflower yellow
+    { emoji: '🌼', color: [255, 255, 150] },      // blossom yellow/white
+    { emoji: '💮', color: [248, 248, 248] },      // white flower
+    { emoji: '🏵️', color: [255, 165, 0] },        // rosette orange
+    { emoji: '🌷', color: [255, 20, 147] },       // tulip pink
+    { emoji: '💐', color: [255, 140, 180] },      // bouquet mixed/pink
+    { emoji: '🥀', color: [139, 69, 19] },        // wilted flower brown
+    { emoji: '🌱', color: [124, 252, 0] },        // seedling light green
+    { emoji: '🪷', color: [219, 112, 147] },      // lotus pink/purple
+    { emoji: '🪻', color: [138, 43, 226] },       // hyacinth purple
+    { emoji: '🌿', color: [60, 179, 113] },       // herb green
+    { emoji: '☘️', color: [46, 139, 87] },        // shamrock green
+    { emoji: '🍀', color: [50, 205, 50] },        // four leaf clover green
+    { emoji: '🪴', color: [34, 139, 34] },        // potted plant green
+    { emoji: '🌵', color: [0, 128, 0] },          // cactus green
+    { emoji: '🌾', color: [240, 230, 140] },      // sheaf of rice khaki
+    { emoji: '🌲', color: [0, 100, 0] },          // evergreen tree dark green
+    { emoji: '🌳', color: [107, 142, 35] },       // deciduous tree olive green
+    { emoji: '🌴', color: [85, 107, 47] },        // palm tree dark olive green
+    { emoji: '🍂', color: [205, 133, 63] },       // fallen leaf brown
+    { emoji: '🍃', color: [144, 238, 144] },      // leaf fluttering light green
+    { emoji: '🍁', color: [178, 34, 34] },        // maple leaf red
+]
+
 // fileInput.addEventListener('change', handleFileInput);
+
+async function copyText() {
+    await navigator.clipboard.writeText(textToCopy);
+    alert('Copied to clipboard!');
+}
 
 function handleFileInput() {
     const file = fileInput.files[0]
@@ -103,6 +152,9 @@ function updateProgress(val) {
 }
 
 async function convertToEmojis(img) {
+    textToCopy = '';
+    copyButton.ariaDisabled = true;
+    copyButton.classList.remove('animated-btn');
     downloadLink.ariaDisabled = true;
     downloadLink.classList.remove('animated-btn');
     canvas.style.display = 'none';
@@ -146,11 +198,13 @@ async function convertToEmojis(img) {
             const {emoji} = findNearestEmoji(avg);
             ctx.clearRect(x * blockSize, y * blockSize, blockSize, blockSize);
             ctx.fillText(emoji, x * blockSize, y * blockSize);
+            textToCopy += emoji;
         }
 
         if (y % 5 === 0) {
             await new Promise(resolve => setTimeout(resolve, 0));
         }
+        textToCopy += '\n';
     }
     updateProgress(1);
     canvas.style.display = 'block';
@@ -160,6 +214,10 @@ async function convertToEmojis(img) {
     downloadLink.href = canvas.toDataURL('image/png');
     downloadLink.ariaDisabled = false;
     downloadLink.classList.add('animated-btn');
+    copyButton.ariaDisabled = false;
+    copyButton.classList.add('animated-btn');
+
+    // console.log('textToCopy', textToCopy);
 
     // console.log(canvas.toDataURL('image/png'));
     // console.log('url set')
@@ -180,10 +238,17 @@ function getAvgColor(data) {
 }
 
 function findNearestEmoji(rgb) {
-    let best = emojis[0];
+    const mode = document.getElementById('mode').value;
+    let emoji_type = emojis;
+    if (mode === 'hearts') {
+        emoji_type = heartsOnly;
+    } else if (mode === 'flowers') {
+        emoji_type = flowers;
+    }
+    let best = emoji_type[0];
     let minDist = Infinity;
-    
-    for (const item of emojis) {
+
+    for (const item of emoji_type) {
         const d = distance(rgb, item.color);
         if (d < minDist) {
             minDist = d;

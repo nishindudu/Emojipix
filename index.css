@@ -64,6 +64,8 @@ body{
     font-size: large;
     cursor: pointer;
     transition-duration: 0.3s;
+    text-align: center;
+    align-content: center;
 }
 
 .btn[aria-disabled="true"] {
