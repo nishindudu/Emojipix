@@ -2,6 +2,8 @@
 
 Turn your images into emoji mosaics. EmojiPix is a web based tool that turns your images into mosaics composed entirely of emojis!
 
+![EmojiPix](https://hackatime-badge.hackclub.com/U091SE37HUN/Img%20to%20emoji?label=EmojiPix)
+
 ## How To Use
 
 1. **Upload**: Choose any image file

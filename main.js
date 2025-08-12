@@ -239,7 +239,7 @@ function getAvgColor(data) {
 
 function findNearestEmoji(rgb) {
     const mode = document.getElementById('mode').value;
-    let emoji_type = emojis;
+    let emoji_type = emojis; //todo: optimize this (move this check to convertToEmojis)
     if (mode === 'hearts') {
         emoji_type = heartsOnly;
     } else if (mode === 'flowers') {
